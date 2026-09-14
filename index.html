@@ -189,8 +189,8 @@
     fill:none;
     stroke:var(--copper);
     stroke-width:1.5;
-    stroke-dasharray: 900;
-    stroke-dashoffset: 900;
+    stroke-dasharray: 1050;
+    stroke-dashoffset: 1050;
     animation: draw 1.8s ease forwards .3s;
   }
   .trace svg circle{
@@ -316,8 +316,17 @@
     padding:32px 0 50px;
     color:var(--ink-dim);
     font-size:13px;
-    display:flex; justify-content:space-between;
     font-family:'IBM Plex Mono', monospace;
+  }
+  .footer-row{
+    display:flex; justify-content:space-between;
+  }
+  .footer-note{
+    margin-top: 24px;
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--ink);
   }
 
   @media (max-width: 860px){
@@ -352,7 +361,7 @@
 
   <section class="hero" style="border-top:none;">
     <div>
-      <div class="hero-eyebrow"><span class="rule"></span> ELECTRICAL ENGINEERING · QUANTITATIVE RESEARCH</div>
+      <div class="hero-eyebrow"><span class="rule"></span> ELECTRICAL ENGINEER · QUANTITATIVE RESEARCHER</div>
       <h1 class="hero-title">Building signal from <em>circuits</em> and <em>markets</em>.</h1>
       <p class="hero-sub">I'm an electrical &amp; electronics engineering student who also works as a quantitative researcher — designing alpha factors and systems on WorldQuant BRAIN. This site collects both sides of that work.</p>
       <div class="hero-actions">
@@ -364,16 +373,16 @@
       <span class="mono">// current_status.log</span>
       <div class="stat-row"><span>Location</span><span>Kenya</span></div>
       <div class="stat-row"><span>Field</span><span>Electrical &amp; Electronics Eng.</span></div>
-      <div class="stat-row"><span>Also building</span><span>Quant alpha research</span></div>
+      <div class="stat-row"><span>Current pos.</span><span>WorldQuant research consultant</span></div>
       <div class="stat-row"><span>Status</span><span>Open to opportunities</span></div>
     </div>
   </section>
 
   <div class="trace" aria-hidden="true">
-    <svg viewBox="0 0 1040 70" preserveAspectRatio="none" width="100%" height="70">
-      <path d="M0,10 L380,10 L410,40 L680,40 L710,10 L1040,10" />
+    <svg viewBox="0 0 1000 70" preserveAspectRatio="none" width="100%" height="70">
+      <path d="M0,10 L380,10 L410,40 L590,40 L620,10 L1000,10" />
       <circle cx="0" cy="10" r="4"></circle>
-      <circle cx="1040" cy="10" r="4"></circle>
+      <circle cx="1000" cy="10" r="4"></circle>
     </svg>
   </div>
 
@@ -384,7 +393,7 @@
     </div>
     <div class="about-grid">
       <div>
-        <p>I study <strong>electrical and electronics engineering</strong>, working through coursework spanning electrical machines, power generation, microprocessor architecture, and digital logic design. That grounding in signals, systems, and hardware constraints carries directly into how I approach my other focus.</p>
+        <p>I study <strong>electrical and electronics engineering</strong>, <strong>power option</strong>, working through coursework spanning electrical machines, power generation, microprocessor architecture, and digital logic design. That grounding in signals, systems, and hardware constraints carries directly into how I approach my other focus.</p>
         <p>Alongside my studies, I work as a <strong>quantitative researcher on WorldQuant BRAIN</strong>, building and documenting alpha expressions, composite factor frameworks, and LLM-assisted research tooling. I treat both disciplines the same way: understand the underlying system, instrument it carefully, and validate before trusting the output.</p>
       </div>
       <div class="focus-list">
@@ -394,7 +403,7 @@
         </div>
         <div class="focus-item">
           <span class="mono">QR</span>
-          <div><h3>Quant research</h3><p>Fastexpr alpha design, cross-sectional factor construction, IC/IR validation.</p></div>
+          <div><h3>Quant research</h3><p>Fastexpression alpha design, cross-sectional factor construction, IC/IR validation.</p></div>
         </div>
         <div class="focus-item">
           <span class="mono">SW</span>
@@ -419,7 +428,7 @@
         <h3>Alpha Harness</h3>
         <p>A local research console for WorldQuant BRAIN — a FastAPI/uv backend paired with a Vite/pnpm React frontend, authenticated against a BRAIN account, built to make alpha iteration and data exploration faster than working through BRAIN's web UI alone.</p>
         <div class="project-links">
-          <a href="#">View repo →</a>
+          <a href="#">Coming soon →</a>
           <a href="#">Case study →</a>
         </div>
       </div>
@@ -434,7 +443,7 @@
         <h3>Composite Alpha Framework</h3>
         <p>A reusable Python framework for combining multiple alpha signals through cross-sectional z-scoring and winsorization, with IC and IR validation built in to check each candidate factor before it's trusted in a larger composite.</p>
         <div class="project-links">
-          <a href="#">View repo →</a>
+          <a href="#">Link coming soon →</a>
         </div>
       </div>
     </div>
@@ -448,7 +457,7 @@
         <h3>AI-Assisted Alpha Generation</h3>
         <p>A notebook-based pipeline that turns a written hypothesis into a structured alpha expression via an LLM, then hands it off to BRAIN's simulation tooling to generate settings and run the resulting candidates in batch.</p>
         <div class="project-links">
-          <a href="#">View repo →</a>
+          <a href="#">To be uploaded →</a>
         </div>
       </div>
     </div>
@@ -462,7 +471,7 @@
         <h3>Electrical Engineering Coursework</h3>
         <p>Worked problem sets and revision material across electrical machines, power generation, microprocessor architecture (8085), and digital logic design — replace this with a specific lab report, design project, or simulation you want to feature.</p>
         <div class="project-links">
-          <a href="#">Add project link →</a>
+          <a href="#">Working on this →</a>
         </div>
       </div>
     </div>
@@ -487,7 +496,7 @@
         <span class="mono">Quant / data</span>
         <ul>
           <li>Alpha factor research</li>
-          <li>Cross-sectional z-scoring</li>
+          <li>Alpha Harness + more tools</li>
           <li>IC / IR validation</li>
           <li>fastexpr &amp; BRAIN operators</li>
         </ul>
@@ -511,16 +520,19 @@
         <p>Open to internships, research collaboration, or just a conversation about engineering and quant research. Reach out through any of these.</p>
       </div>
       <div class="contact-links">
-        <a href="mailto:your.email@example.com">Email <span class="mono">your.email@example.com</span></a>
-        <a href="#">GitHub <span class="mono">github.com/yourhandle</span></a>
-        <a href="#">LinkedIn <span class="mono">linkedin.com/in/yourhandle</span></a>
+        <a href="mailto:w1433585@gmail.com">Email <span class="mono">w1433585@gmail.com</span></a>
+        <a href="https://github.com/w14-stack">GitHub <span class="mono">https://github.com/w14-stack</span></a>
+        <a href="https://www.linkedin.com/in/willy-g-sync">LinkedIn <span class="mono">www.linkedin.com/in/willy-g-sync</span></a>
       </div>
     </div>
   </section>
 
   <footer>
-    <span>© 2026 Your Name</span>
+    <div class="footer-row">
+    <span>© 2026 Wilson Githure</span>
     <span>Built with HTML, CSS &amp; JS</span>
+  </div>
+  <p class="footer-note">Created word by word with confidence</p>
   </footer>
 
 </main>
