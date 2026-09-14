@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Electrical Engineer & Quantitative Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:        #10201A;
+    --bg-alt:    #16281F;
+    --panel:     #1B2F25;
+    --ink:       #ECE6D6;
+    --ink-dim:   #A9B3A6;
+    --copper:    #C17A3E;
+    --copper-br: #E0965A;
+    --teal:      #5C9791;
+    --line:      rgba(236,230,214,0.14);
+    --line-br:   rgba(236,230,214,0.28);
+    --radius:    2px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--copper); color:var(--bg); }
+
+  a{ color:inherit; }
+
+  :focus-visible{
+    outline: 2px solid var(--copper-br);
+    outline-offset: 3px;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.85em;
+  }
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 40px;
+  }
+
+  /* ---------- background circuit texture ---------- */
+  .board-grid{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    opacity:0.5;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter: blur(10px);
+    background: rgba(16,32,26,0.82);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 40px;
+    max-width:1120px; margin:0 auto;
+  }
+  .nav-mark{
+    display:flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px; letter-spacing:0.02em;
+    color:var(--ink);
+  }
+  .nav-mark .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--copper-br);
+    box-shadow:0 0 8px var(--copper-br);
+  }
+  nav.links{ display:flex; gap:32px; font-size:14px; }
+  nav.links a{
+    text-decoration:none; color:var(--ink-dim);
+    transition:color .2s ease;
+    position:relative;
+  }
+  nav.links a:hover{ color:var(--ink); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative; z-index:1;
+    padding:120px 0 100px;
+    display:grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap:48px;
+    align-items:end;
+  }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--copper-br);
+    margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-eyebrow .rule{
+    width:32px; height:1px; background:var(--copper-br);
+  }
+  h1.hero-title{
+    font-size:clamp(40px, 5.4vw, 72px);
+    max-width:14ch;
+  }
+  h1.hero-title em{
+    font-style:italic; color:var(--copper-br);
+  }
+  .hero-sub{
+    margin-top:26px;
+    max-width:46ch;
+    color:var(--ink-dim);
+    font-size:17.5px;
+  }
+  .hero-actions{
+    margin-top:38px;
+    display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px;
+    font-size:14.5px; font-weight:500;
+    border-radius:var(--radius);
+    text-decoration:none;
+    border:1px solid var(--line-br);
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .btn.primary{
+    background:var(--copper);
+    color:#14201A;
+    border-color:var(--copper);
+  }
+  .btn.primary:hover{ background:var(--copper-br); }
+  .btn.ghost:hover{ border-color:var(--copper-br); color:var(--copper-br); }
+
+  .hero-panel{
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:26px;
+    border-radius:var(--radius);
+  }
+  .hero-panel .mono{
+    display:block; color:var(--teal); margin-bottom:14px; font-size:13px;
+  }
+  .hero-panel .stat-row{
+    display:flex; justify-content:space-between;
+    padding:10px 0;
+    border-top:1px solid var(--line);
+    font-size:14px;
+  }
+  .hero-panel .stat-row:first-of-type{ border-top:none; }
+  .hero-panel .stat-row span:first-child{ color:var(--ink-dim); }
+
+  /* animated trace under hero, single orchestrated entrance */
+  .trace{
+    position:relative; z-index:1;
+    height:70px;
+    margin-top:-40px;
+  }
+  .trace svg path{
+    fill:none;
+    stroke:var(--copper);
+    stroke-width:1.5;
+    stroke-dasharray: 900;
+    stroke-dashoffset: 900;
+    animation: draw 1.8s ease forwards .3s;
+  }
+  .trace svg circle{
+    fill:var(--copper-br);
+    opacity:0;
+    animation: pop .4s ease forwards 2s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  @keyframes pop{ to{ opacity:1; } }
+  @media (prefers-reduced-motion: reduce){
+    .trace svg path{ animation:none; stroke-dashoffset:0; }
+    .trace svg circle{ animation:none; opacity:1; }
+  }
+
+  /* ---------- section shell ---------- */
+  section{
+    position:relative; z-index:1;
+    padding:90px 0;
+    border-top:1px solid var(--line);
+  }
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:52px;
+    flex-wrap:wrap; gap:16px;
+  }
+  .section-head h2{ font-size:clamp(28px,3vw,38px); }
+  .section-head .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--ink-dim);
+  }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:56px;
+  }
+  .about-grid p{
+    color:var(--ink-dim);
+    max-width:58ch;
+    margin-bottom:16px;
+    font-size:16.5px;
+  }
+  .about-grid p strong{ color:var(--ink); font-weight:500; }
+  .focus-list{ display:flex; flex-direction:column; gap:0; }
+  .focus-item{
+    padding:18px 0;
+    border-top:1px solid var(--line);
+    display:grid; grid-template-columns: 90px 1fr; gap:20px;
+  }
+  .focus-item:last-child{ border-bottom:1px solid var(--line); }
+  .focus-item .mono{ color:var(--teal); padding-top:2px; }
+  .focus-item h3{ font-size:17px; margin-bottom:6px; font-weight:500; }
+  .focus-item p{ color:var(--ink-dim); font-size:14.5px; max-width:44ch; }
+
+  /* ---------- projects ---------- */
+  .project{
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    gap:40px;
+    padding:34px 0;
+    border-top:1px solid var(--line);
+  }
+  .project:last-child{ border-bottom:1px solid var(--line); }
+  .project-meta{ }
+  .project-meta .mono{ color:var(--copper-br); display:block; margin-bottom:8px; }
+  .project-meta .stack{ color:var(--ink-dim); font-size:13.5px; line-height:1.7; }
+  .project-body h3{ font-size:22px; margin-bottom:10px; }
+  .project-body p{ color:var(--ink-dim); max-width:64ch; margin-bottom:14px; }
+  .project-links{ display:flex; gap:18px; font-size:14px; }
+  .project-links a{
+    color:var(--teal); text-decoration:none; border-bottom:1px solid transparent;
+    transition:border-color .2s ease;
+  }
+  .project-links a:hover{ border-color:var(--teal); }
+
+  /* ---------- skills ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .skill-col{
+    background:var(--bg);
+    padding:28px 26px;
+  }
+  .skill-col .mono{ color:var(--copper-br); display:block; margin-bottom:16px; }
+  .skill-col ul{ list-style:none; }
+  .skill-col li{
+    color:var(--ink-dim);
+    font-size:14.5px;
+    padding:7px 0;
+    border-top:1px solid var(--line);
+  }
+  .skill-col li:first-child{ border-top:none; }
+
+  /* ---------- contact ---------- */
+  .contact{
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .contact h2{ font-size:clamp(30px,4vw,46px); max-width:12ch; }
+  .contact p{ color:var(--ink-dim); max-width:44ch; margin-top:18px; }
+  .contact-links{ display:flex; flex-direction:column; }
+  .contact-links a{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 0;
+    border-top:1px solid var(--line);
+    text-decoration:none;
+    font-size:17px;
+    color:var(--ink);
+    transition:color .2s ease;
+  }
+  .contact-links a:last-child{ border-bottom:1px solid var(--line); }
+  .contact-links a .mono{ color:var(--ink-dim); font-size:13px; }
+  .contact-links a:hover{ color:var(--copper-br); }
+
+  footer{
+    padding:32px 0 50px;
+    color:var(--ink-dim);
+    font-size:13px;
+    display:flex; justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 860px){
+    .wrap{ padding:0 22px; }
+    .nav-inner{ padding:18px 22px; }
+    nav.links{ display:none; }
+    .hero{ grid-template-columns:1fr; padding:80px 0 60px; }
+    .about-grid{ grid-template-columns:1fr; }
+    .project{ grid-template-columns:1fr; gap:14px; }
+    .skills-grid{ grid-template-columns:1fr; }
+    .contact{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="board-grid" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark"><span class="dot"></span> YOUR.NAME</div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border-top:none;">
+    <div>
+      <div class="hero-eyebrow"><span class="rule"></span> ELECTRICAL ENGINEERING · QUANTITATIVE RESEARCH</div>
+      <h1 class="hero-title">Building signal from <em>circuits</em> and <em>markets</em>.</h1>
+      <p class="hero-sub">I'm an electrical &amp; electronics engineering student who also works as a quantitative researcher — designing alpha factors and systems on WorldQuant BRAIN. This site collects both sides of that work.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn primary">View projects</a>
+        <a href="#contact" class="btn ghost">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <span class="mono">// current_status.log</span>
+      <div class="stat-row"><span>Location</span><span>Kenya</span></div>
+      <div class="stat-row"><span>Field</span><span>Electrical &amp; Electronics Eng.</span></div>
+      <div class="stat-row"><span>Also building</span><span>Quant alpha research</span></div>
+      <div class="stat-row"><span>Status</span><span>Open to opportunities</span></div>
+    </div>
+  </section>
+
+  <div class="trace" aria-hidden="true">
+    <svg viewBox="0 0 1040 70" preserveAspectRatio="none" width="100%" height="70">
+      <path d="M0,10 L380,10 L410,40 L680,40 L710,10 L1040,10" />
+      <circle cx="0" cy="10" r="4"></circle>
+      <circle cx="1040" cy="10" r="4"></circle>
+    </svg>
+  </div>
+
+  <section id="about">
+    <div class="section-head">
+      <h2>About</h2>
+      <span class="tag">01 — background</span>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>I study <strong>electrical and electronics engineering</strong>, working through coursework spanning electrical machines, power generation, microprocessor architecture, and digital logic design. That grounding in signals, systems, and hardware constraints carries directly into how I approach my other focus.</p>
+        <p>Alongside my studies, I work as a <strong>quantitative researcher on WorldQuant BRAIN</strong>, building and documenting alpha expressions, composite factor frameworks, and LLM-assisted research tooling. I treat both disciplines the same way: understand the underlying system, instrument it carefully, and validate before trusting the output.</p>
+      </div>
+      <div class="focus-list">
+        <div class="focus-item">
+          <span class="mono">EE</span>
+          <div><h3>Hardware &amp; systems</h3><p>Electrical machines, power generation, microprocessor and digital logic design.</p></div>
+        </div>
+        <div class="focus-item">
+          <span class="mono">QR</span>
+          <div><h3>Quant research</h3><p>Fastexpr alpha design, cross-sectional factor construction, IC/IR validation.</p></div>
+        </div>
+        <div class="focus-item">
+          <span class="mono">SW</span>
+          <div><h3>Tooling</h3><p>Python research pipelines, API wrapper debugging, LLM-assisted generation.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <span class="tag">02 — projects</span>
+    </div>
+
+    <div class="project">
+      <div class="project-meta">
+        <span class="mono">alpha-harness</span>
+        <div class="stack">FastAPI · uv<br>Vite · React · pnpm</div>
+      </div>
+      <div class="project-body">
+        <h3>Alpha Harness</h3>
+        <p>A local research console for WorldQuant BRAIN — a FastAPI/uv backend paired with a Vite/pnpm React frontend, authenticated against a BRAIN account, built to make alpha iteration and data exploration faster than working through BRAIN's web UI alone.</p>
+        <div class="project-links">
+          <a href="#">View repo →</a>
+          <a href="#">Case study →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-meta">
+        <span class="mono">composite-alpha</span>
+        <div class="stack">Python · pandas<br>numpy</div>
+      </div>
+      <div class="project-body">
+        <h3>Composite Alpha Framework</h3>
+        <p>A reusable Python framework for combining multiple alpha signals through cross-sectional z-scoring and winsorization, with IC and IR validation built in to check each candidate factor before it's trusted in a larger composite.</p>
+        <div class="project-links">
+          <a href="#">View repo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-meta">
+        <span class="mono">ai-alpha-comp</span>
+        <div class="stack">Jupyter · LLM API<br>BRAIN ace_lib</div>
+      </div>
+      <div class="project-body">
+        <h3>AI-Assisted Alpha Generation</h3>
+        <p>A notebook-based pipeline that turns a written hypothesis into a structured alpha expression via an LLM, then hands it off to BRAIN's simulation tooling to generate settings and run the resulting candidates in batch.</p>
+        <div class="project-links">
+          <a href="#">View repo →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-meta">
+        <span class="mono">eeeng-coursework</span>
+        <div class="stack">Machines · Power<br>Microprocessors</div>
+      </div>
+      <div class="project-body">
+        <h3>Electrical Engineering Coursework</h3>
+        <p>Worked problem sets and revision material across electrical machines, power generation, microprocessor architecture (8085), and digital logic design — replace this with a specific lab report, design project, or simulation you want to feature.</p>
+        <div class="project-links">
+          <a href="#">Add project link →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <h2>Skills</h2>
+      <span class="tag">03 — toolkit</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-col">
+        <span class="mono">Engineering</span>
+        <ul>
+          <li>Electrical machines &amp; power systems</li>
+          <li>Microprocessor architecture</li>
+          <li>Digital logic design</li>
+          <li>Circuit analysis</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <span class="mono">Quant / data</span>
+        <ul>
+          <li>Alpha factor research</li>
+          <li>Cross-sectional z-scoring</li>
+          <li>IC / IR validation</li>
+          <li>fastexpr &amp; BRAIN operators</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <span class="mono">Tools</span>
+        <ul>
+          <li>Python (pandas, numpy)</li>
+          <li>FastAPI, React / Vite</li>
+          <li>Jupyter</li>
+          <li>Git</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact">
+      <div>
+        <h2>Let's talk.</h2>
+        <p>Open to internships, research collaboration, or just a conversation about engineering and quant research. Reach out through any of these.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:your.email@example.com">Email <span class="mono">your.email@example.com</span></a>
+        <a href="#">GitHub <span class="mono">github.com/yourhandle</span></a>
+        <a href="#">LinkedIn <span class="mono">linkedin.com/in/yourhandle</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Your Name</span>
+    <span>Built with HTML, CSS &amp; JS</span>
+  </footer>
+
+</main>
+
+</body>
+</html>
