@@ -7,19 +7,43 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    var t = 'dark';
+    try { t = localStorage.getItem('theme') || 'dark'; } catch(e){}
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 <style>
   :root{
-    --bg:        #0d0e0d;
-    --bg-alt:    #1e3329;
-    --panel:     #1B2F25;
-    --ink:       #ECE6D6;
-    --ink-dim:   #A9B3A6;
+    --bg:        #000000;
+    --bg-alt:    #0a0a0a;
+    --panel:     #111111;
+    --nav-bg:    #000000;
+    --ink:       #F2F2F2;
+    --ink-dim:   #B3B3B3;
     --copper:    #C17A3E;
     --copper-br: #E0965A;
     --teal:      #5C9791;
-    --line:      rgba(236,230,214,0.14);
-    --line-br:   rgba(236,230,214,0.28);
+    --btn-ink:   #14201A;
+    --line:      rgba(242,242,242,0.16);
+    --line-br:   rgba(242,242,242,0.30);
     --radius:    2px;
+  }
+
+  :root[data-theme="light"]{
+    --bg:        #CDE7F9;
+    --bg-alt:    #BBDCF3;
+    --panel:     #E4F2FC;
+    --nav-bg:    #CDE7F9;
+    --ink:       #0A2540;
+    --ink-dim:   #3B556E;
+    --copper:    #B5651D;
+    --copper-br: #8C4710;
+    --teal:      #1E5C57;
+    --btn-ink:   #FFFFFF;
+    --line:      rgba(10,37,64,0.18);
+    --line-br:   rgba(10,37,64,0.34);
   }
 
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -68,20 +92,13 @@
     inset:0;
     z-index:0;
     pointer-events:none;
-    opacity:0.5;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 64px 64px;
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
-            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
   }
 
   /* ---------- nav ---------- */
   header.nav{
     position:sticky; top:0; z-index:50;
     backdrop-filter: blur(10px);
-    background: rgba(16,32,26,0.82);
+    background: var(--nav-bg);
     border-bottom:1px solid var(--line);
   }
   .nav-inner{
@@ -100,13 +117,30 @@
     background:var(--copper-br);
     box-shadow:0 0 8px var(--copper-br);
   }
-  nav.links{ display:flex; gap:32px; font-size:14px; }
+  nav.links{ display:flex; gap:32px; font-size:14px; margin-left:auto; }
   nav.links a{
     text-decoration:none; color:var(--ink-dim);
     transition:color .2s ease;
     position:relative;
   }
   nav.links a:hover{ color:var(--ink); }
+
+  .theme-toggle{
+    margin-left:28px;
+    width:38px; height:38px;
+    display:inline-flex; align-items:center; justify-content:center;
+    background:transparent;
+    color:var(--ink);
+    border:1px solid var(--line-br);
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .theme-toggle:hover{ border-color:var(--copper-br); color:var(--copper-br); }
+  .theme-toggle svg{ width:18px; height:18px; }
+  .theme-toggle .icon-moon{ display:none; }
+  :root[data-theme="light"] .theme-toggle .icon-sun{ display:none; }
+  :root[data-theme="light"] .theme-toggle .icon-moon{ display:block; }
 
   /* ---------- hero ---------- */
   .hero{
@@ -155,7 +189,7 @@
   }
   .btn.primary{
     background:var(--copper);
-    color:#14201A;
+    color:var(--btn-ink);
     border-color:var(--copper);
   }
   .btn.primary:hover{ background:var(--copper-br); }
@@ -333,6 +367,7 @@
     .wrap{ padding:0 22px; }
     .nav-inner{ padding:18px 22px; }
     nav.links{ display:none; }
+    .theme-toggle{ margin-left:auto; }
     .hero{ grid-template-columns:1fr; padding:80px 0 60px; }
     .about-grid{ grid-template-columns:1fr; }
     .project{ grid-template-columns:1fr; gap:14px; }
@@ -354,6 +389,10 @@
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Toggle light / dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
   </div>
 </header>
 
@@ -536,6 +575,24 @@
   </footer>
 
 </main>
+
+<script>
+  (function(){
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    function sync(){
+      var light = root.getAttribute('data-theme') === 'light';
+      btn.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+    }
+    btn.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch(e){}
+      sync();
+    });
+    sync();
+  })();
+</script>
 
 </body>
 </html>
